@@ -7,9 +7,27 @@
 - [ ] PPT整合
 - [ ] PPT打包
 
-## 目录（按照课程编号）
+## 使用说明
+
+克隆本项目：`git clone git@github.com:GloomyNAN/cs.git`到本地
+
+### 使用方式
+
+本项目使用LaTeX公式编写，如需要预览及编辑可选已下几种方式
+
+1. vscode:安装[vscode](https://code.visualstudio.com/)，安装`Markdown All in One`插件
+2. Mac平台安装[MWeb](https://zh.mweb.im)软件，设置如下图
+   ![MWeb设置](./assets/mweb-config.png)
+3. Windows平台安装[typora](https://www.typora.io)(此软件也支持MAC平台)
+3. 其他平台可以参考[mathjax](https://www.mathjax.org)
+
+## 目录（按照课程编号，会逐步迭代）
 
 ### 01-离散数学
+
+- [01-集合论](./01-离散数学/离散数学01-集合论.md)
+- [02-命题逻辑](./01-离散数学/离散数学02-命题逻辑.md)
+- [03-一阶逻辑](./01-离散数学/离散数学03-一阶逻辑.md)
 
 ### 02-C语言
 
@@ -39,4 +57,4 @@
 
 # License
 
-MIT
+MIT GloomyNAN
