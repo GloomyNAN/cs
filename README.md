@@ -6,7 +6,7 @@
 - [ ] PPT改名
 - [ ] PPT整合
 - [ ] PPT打包
-
+http://www.xiaoyinka.com/pages/8cfbefff-c0ac-4a40-ad36-70f64ffc3b94
 ## 使用说明
 
 克隆本项目：`git clone git@github.com:GloomyNAN/cs.git`到本地
@@ -32,6 +32,8 @@
 ### 02-C语言
 
 ### 03-计算机原理
+
+- [01-计算机系统概论](./03-计算机原理/计算机原理01-计算机系统概论.md)
 
 ### 04-数据结构
 
