@@ -6,7 +6,7 @@
 - [ ] PPT改名
 - [ ] PPT整合
 - [ ] PPT打包
-http://www.xiaoyinka.com/pages/8cfbefff-c0ac-4a40-ad36-70f64ffc3b94
+
 ## 使用说明
 
 克隆本项目：`git clone git@github.com:GloomyNAN/cs.git`到本地
