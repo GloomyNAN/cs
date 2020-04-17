@@ -2,18 +2,23 @@
 
 ## TODO List
 
-- [ ] 整合到个人博客Hexo
+- [x] 整合到个人博客Hexo-修改为Github Page
+- [ ] latex支持
 - [ ] PPT改名
 - [ ] PPT整合
 - [ ] PPT打包
 
 ## 使用说明
 
+### 在线方式
+
+点击[http://cs.gloomynan.com](http://cs.gloomynan.com)访问
+
+### 本地方式
+
 克隆本项目：`git clone git@github.com:GloomyNAN/cs.git`到本地
 
-### 使用方式
-
-本项目使用LaTeX公式编写，如需要预览及编辑可选已下几种方式
+**本项目使用LaTeX公式编写，如需要预览及编辑可选已下几种方式**
 
 1. vscode:安装[vscode](https://code.visualstudio.com/)，安装`Markdown All in One`插件
 2. Mac平台安装[MWeb](https://zh.mweb.im)软件，设置如下图
