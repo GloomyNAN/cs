@@ -3,7 +3,7 @@
 ## TODO List
 
 - [x] 整合到个人博客Hexo-修改为Github Page
-- [ ] latex支持
+- [x] latex支持
 - [ ] PPT改名
 - [ ] PPT整合
 - [ ] PPT打包
