@@ -84,16 +84,110 @@ import java.awt.event.*; 
   - 事件不会被意外地处理
   - 有可能创建并使用适配器 (adapter)类对事件动作进行分类
   - 委托模型有利于把工作分布到各个类中
-- 缺点：不容易将JDK1.0 代码移植到JDK1.1 上
+- 缺点：不容易将JDK1.0 代码移植到JDK1.1上
 
 ## 第二节 事件的分类和处理
 
+- 概述
+- 常用接口类
+  - ActionListener
+  - MouseMotionListener
+  - MouseListener
+  - WindowListener
+
+### 事件类的层次结构
+
+![事件类的层次结构](./网络程序设计07-AWT事件模型/事件类的层次结构.png)
+
+### 事件类
+
+- java.util.EventObject类是所有事件对象的基础父类，所有事件都是由它派生出来的。
+- AWT的相关事件继承于java.awt.AWTEvent类，这些AWT事件分为两大类：
+- 低级事件：指基于组件和容器的事件，当一个组件上发生事件，如：鼠标的进入，点击，拖放等，或组件的窗口开关等，触发了组件事件。 
+- 高级事件：基于语义的事件，它可以不和特定的动作相关联，而依赖于触发此事件的类，如在TextField中按Enter键会触发ActionEvent事件,滑动滚动条会触发AdjustmentEvent事件，或是选中项目列表的某一条就会触发ItemEvent事件。
+
+#### 低级事件
+
+- ComponentEvent：组件事件：组件尺寸的变化，移动
+- ContainerEvent：容器事件：组件增加，移动
+- WindowEvent：窗口事件：关闭窗口，窗口闭合，图标化
+- FocusEvent：焦点事件：焦点的获得和丢失
+- KeyEvent:键盘事件：键按下、释放
+- MouseEvent:鼠标事件：鼠标单击，移动
+
+### 高级事件
+
+- ActionEvent：动作事件：按钮按下，TextField 中按Enter键
+- AdjustmentEvent：调节事件：在滚动条上移动滑块以调节数值
+- ItemEvent：项目事件：选择项目，不选择“项目改变”
+- TextEvent：文本事件，文本对象改变
+
+### 事件监听器
+
+- 每类事件都有对应的事件监听器，监听器是接口，根据动作来定义方法。 
+- AWT的组件类中提供注册和注销监听器的方法：
+  - 注册监听器：`public void add<ListenerType> (<ListenerType> listener);`
+  - 注销监听器：`public void remove<ListenerType> (<ListenerType> listener);`
+- 所有AWT事件及其相应的监听器接口表
+
+#### 多监听者
+
+- 多监听者可以使一个程序的不相关部分执行同样的动作
+- 事件发生时，所有被注册的监听者的处理器都会被调用
+
+#### ActionListener
+
+- Button或TextField对象可以登记ActionListener以响应鼠标键击事件
+- 使用addActionListener()方法来登记ActionListener，方法的参数为一个实施了ActionListener接口的类的实例。该实例是事件的处理者。
+- ActionListener中定义了一个actionPerformed(ActionEvent)方法
+- 事件处理者必须重写actionPerform()方法，在其中加入事件处理代码。当事件产生时，系统会自动调用该方法，并将ActionEvent类型的事件对象作为参数传入，程序中可利用该对象的方法。
+
+#### MouseMotionListener
+
+- MouseMotionListener主要用于获取和处理鼠标移动的事件
+- 它包含了两个方法：
+  - mouseDragged(MouseEvent e)：对应鼠标拖动(dragging)的事件(在移动中按下鼠标键)
+  - mouseMoved(MouseEvent e)：对应鼠标的移动（鼠标键未按下）
+  - 即使你只对鼠标的拖动感兴趣，该接口中的两个方法也都必须实施，只是具体实现可为空。
+
+**所有组件类都能登记MouseMotionListener**
+
+由MouseListener接口包含5个方法，可以处理5类事件
+
+1. mouseEntered(MouseEvent e)当鼠标进入组件区域时
+2. mouseExited (MouseEvent e)当鼠标退出组件区域时
+3. mousePressed (MouseEvent e)当在组件区域有鼠标键按下时
+4. mouseReleased (MouseEvent e)当在组件区域鼠标键处于释放状态时
+5. mouseClicked (MouseEvent e)组件区域键击鼠标时
+
+**MouseListener()能被所有组件类所登记**
+
+#### WindowListener
+
+- WindowListener接口定义了7个方法，用于登记与窗口有关的事件
+- windowClosing(WindowEvent e)
+  - 对应窗口关闭事件，如用户点击窗口右上方的关闭图标。
+- 其他方法：
+  - windowOpened()，windowClosed()
+  - windowIconified()，windowDeiconified()
+  - windowActivated()，windowDeactivated() 
+
+### 事件的处理
+
+委托代理模型中事件的处理过程一般如下：
+
+- 要响应事件的组件对象调用addXXXListener()方法登记相应的Listener
+- 编写事件处理程序
+
+可以写一个实施对应Listener的类，在类中重写感兴趣的事件方法，在方法中加入事件处理代码。该类的实例可作为addXXXListener()方法的参数。
+
+或在当前类中实施相应的Listener接口，在当前类中重写感兴趣的事件方法并加入事件处理代码。而addXXXListener()的参数使用this关键字，代表当前对象。
+
+当事件产生时，系统自动会调用对应的事件方法，事件对象作为方法的参数传入，处理时可利用其方法
 
 ## 第三节 事件适配器
 
 
-
-![通用计算机分类](./网络程序设计07-AWT事件模型/通用计算机分类.png)
 ![通用计算机分类](./网络程序设计07-AWT事件模型/通用计算机分类.png)
 ![通用计算机分类](./网络程序设计07-AWT事件模型/通用计算机分类.png)
 ![通用计算机分类](./网络程序设计07-AWT事件模型/通用计算机分类.png)
