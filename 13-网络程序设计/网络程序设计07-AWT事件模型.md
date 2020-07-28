@@ -185,21 +185,69 @@ import java.awt.event.*; 
 
 当事件产生时，系统自动会调用对应的事件方法，事件对象作为方法的参数传入，处理时可利用其方法
 
-## 第三节 事件适配器
+## 第三节 事件适配器（EventAdapter）
 
+### 引入事件适配器的原因
 
-![通用计算机分类](./网络程序设计07-AWT事件模型/通用计算机分类.png)
-![通用计算机分类](./网络程序设计07-AWT事件模型/通用计算机分类.png)
-![通用计算机分类](./网络程序设计07-AWT事件模型/通用计算机分类.png)
-![通用计算机分类](./网络程序设计07-AWT事件模型/通用计算机分类.png)
-![通用计算机分类](./网络程序设计07-AWT事件模型/通用计算机分类.png)
+前面提到，对于实施了各类Listener接口的类，必须实现该Listener中定义的所有方法，即使对有些方法不感兴趣，也一定要实施它们，虽然方法的内容可为空。
 
-![通用计算机分类](./网络程序设计07-AWT事件模型/通用计算机分类.png)
-![通用计算机分类](./网络程序设计07-AWT事件模型/通用计算机分类.png)
-![通用计算机分类](./网络程序设计07-AWT事件模型/通用计算机分类.png)
-![通用计算机分类](./网络程序设计07-AWT事件模型/通用计算机分类.png)
-![通用计算机分类](./网络程序设计07-AWT事件模型/通用计算机分类.png)
-![通用计算机分类](./网络程序设计07-AWT事件模型/通用计算机分类.png)
-![通用计算机分类](./网络程序设计07-AWT事件模型/通用计算机分类.png)
-![通用计算机分类](./网络程序设计07-AWT事件模型/通用计算机分类.png)
-![通用计算机分类](./网络程序设计07-AWT事件模型/通用计算机分类.png)
+对于一些方法定义较多的接口，如MouseListener，五个方法都要实现，使编程者感到麻烦。
+
+为方便程序员，Java定义了一些实施了这些接口的类，统称为事件处理接口类(Event Adapters)
+
+它们实现了接口的全部方法，但方法体均为空。程序员如继承了这些类，只要在里面重写感兴趣的方法即可。
+
+### 常用事件适配器
+
+- MouseAdapter——对应MouseListener 
+- MouseMotionAdapter——对应MouseMotionListener
+- WindowAdapter——对应WindowListener
+- ComponentAdapter——对应ComponentListener 
+- ContainerAdapter——对应ContainerListener 
+- FocusAdapter——对应FocusListener 
+- KeyAdapter——对应KeyListener 
+
+**ActionListener中因只定义了一个actionPerformed()方法，所以没有对应的事件处理接口类。**
+
+### 事件处理接口类的例子
+
+```java
+import java.awt.*;
+import java.awt.event.*;
+public class MouseClickHandler extends 	MouseAdapter {
+	//假设用户只对鼠标键击事件感兴趣 
+	public void mouseClicked(MouseEvent e) {
+		//事件处理程序..
+	}
+}
+```
+
+**通过继承MouseAdapter类，相当于间接实施了MouseListener接口，并继承了该接口的5个方法，但实现为空。**
+
+### 处理窗口关闭事件
+
+在第七章的一些例子中，程序产生的窗口不能自动关闭，主要是程序中没有对应的事件处理代码。以下代码可关闭程序当前的窗口。 
+
+```java
+import java.awt.event.*;
+class WinListener extends WindowAdapter {
+  public void windowClosing(WindowEvent e) {
+    System.exit(0); //System类的exit()方法可结束程序，关闭程序窗口，参数0为返回值，表示正常退出
+  }
+}
+```
+**若f是窗口对应的对象，可用语句f.addWindowListener(new WinListener()) 将Listener加入。**
+
+### 用内部类实现事件处理
+
+- 内部类（inner class）是被定义于另一个类中的类，使用内部类的主要原因是由于
+  - 一个内部类的对象可访问外部类的成员方法和变量，包括私有的成员
+  - 实现事件监听器时，采用内部类、匿名类编程非常容易实现其功能
+  - 编写事件驱动程序，内部类很方便
+- 关于内部类的使用方法可以参见示例程序中InnerClass.java
+
+### 匿名类（Anonymous Class）
+
+当一个内部类的类声名只是在创建此类对象时用了一次，而且要产生的新类需继承于一个已有的父类或实现一个接口，才能考虑用匿名类，由于匿名类本身无名，因此它也就不存在构造方法，它需要显示地调用一个无参的父类的构造方法，并且重写父类的方法。所谓的匿名就是该类连名字都没有，只是显示地调用一个无参的父类的构造方法。
+
+关于内部类的使用方法可以参见示例程序中AnonymousClass.java
